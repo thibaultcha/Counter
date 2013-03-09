@@ -1,9 +1,9 @@
 # CounterApp
-This little application is a test for [Solib](https://github.com/ECE-Campus-Cluster/SoLib) using node.js and socket.io to display a synchronized counter between multiple browsers. It requires node.js, socket.io and [node-mysql](http://github.com/felixge/node-mysql) to be installed.
+This little application is a test for [Solib](https://github.com/ECE-Campus-Cluster/SoLib) using [Node.js](http://nodejs.org/) and [Socket.IO](http://socket.io/) to display a synchronized counter between multiple browsers. It requires Node.js, Socket.IO and [node-mysql](http://github.com/felixge/node-mysql) to be installed.
 
 ## How to use it
-1. node.js can be downloaded [here](http://nodejs.org/download/).
-To install socket.io and node-mysql, run the following command in the CounterApp directory: 
+1. Node.js can be downloaded [here](http://nodejs.org/download/).
+To install Socket.IO and node-mysql, run those commands in the app directory or in any parent dir: 
 
 ```bash
 npm install socket.io
@@ -13,7 +13,7 @@ npm install socket.io
 npm install mysql@2.0.0-alpha7
 ```
 
- You should now have a directory named `node_modules` with a socket.io and mysql folders in it.
+You should now have a directory named `node_modules` with a `socket.io` and `mysql` folders in it.
 
 2. Configure your app in config.js and the address and port in the index.html `io.connection` function.
 
@@ -23,7 +23,7 @@ npm install mysql@2.0.0-alpha7
 
 You can also make the server run as a background process using: `nohup node server.js > output.log &`.
 
-* By taping `/supersecretfunction` after your domain name and port number you will reset the counter to 0.
+* By taping the `/supersecretfunction` request you will reset the counter to 0.
 
 ## Licensing
 Copyright (C) 2013 by Thibault Charbonnier.
