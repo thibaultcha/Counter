@@ -1,5 +1,5 @@
 var config = require('./config')
-app        = require('http').createServer(handler).listen(config.port)
+app        = require('http').createServer(handler).listen(config.PORT)
 io         = require('socket.io').listen(app)
 path       = require('path')
 fs         = require('fs')
@@ -7,7 +7,7 @@ mysql      = require('./mysql')
 file       = "/index.html"
 counter    = 0
 
-db = mysql.connect(config.host, config.database, config.username, config.password)
+db = mysql.connect(config.HOST, config.DBNAME, config.DBUSERNAME, config.DBPASSWORD)
 
 /**
 * The function used by node.js to handle a request

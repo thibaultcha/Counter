@@ -14,9 +14,9 @@ const password = "root"
 const port = 25000;
 
 module.exports = {
-    port     : port,
-    host     : host,
-    database : database,
-    username : username,
-    password : password
+	HOST       : host,
+    PORT       : port,
+    DBNAME     : database,
+    DBUSERNAME : username,
+    DBPASSWORD : password
 };
