@@ -4,7 +4,6 @@ io         = require('socket.io').listen(app)
 path       = require('path')
 fs         = require('fs')
 mysql      = require('./mysql')
-file       = "/index.html"
 counter    = 0
 
 db = mysql.connect(config.HOST, config.DBNAME, config.DBUSERNAME, config.DBPASSWORD)
@@ -27,7 +26,7 @@ function handler(request, response) {
 			console.log("Counter reset.")
 		break;
 	}
-	// Static files
+	// Serve static files
     switch (extname) {
         case '.js':
             contentType = 'text/javascript'
