@@ -1,23 +1,23 @@
 /* port the server will be listening on */
-const port = 25000;
+const port = 25000
 
 /* dir for frontend views */
-const rootviews = __dirname + "/views";
+const rootviews = __dirname + "/views"
 
 
 /* OPTIONAL CONFIG FROM HERE */
 
 /* database host */
-const host = "localhost";
+const host = "localhost"
 
 /* database name */
-const database = "solib";
+const database = "solib"
 
 /* database username */
-const username = "root";
+const username = "root"
 
 /* database password */
-const password = "root"; // omg
+const password = "root" // omg
 
 module.exports = {
     PORT       : port,
@@ -26,4 +26,4 @@ module.exports = {
     DBNAME     : database,
     DBUSERNAME : username,
     DBPASSWORD : password
-};
+}

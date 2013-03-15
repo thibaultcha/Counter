@@ -1,58 +1,58 @@
-var config = require('./config');
-http       = require('http');
-io         = require('socket.io');
-path       = require('path');
-fs         = require('fs');
-mysql      = require('./mysql');
-counter    = 0;
+var config = require('./config')
+http       = require('http')
+io         = require('socket.io')
+path       = require('path')
+fs         = require('fs')
+mysql      = require('./mysql')
+counter    = 0
 
-db = mysql.connect(config.DBHOST, config.DBNAME, config.DBUSERNAME, config.DBPASSWORD);
+db = mysql.connect(config.DBHOST, config.DBNAME, config.DBUSERNAME, config.DBPASSWORD)
 
-var server = http.createServer(handler).listen(config.PORT);
-var sio    = io.listen(server);
+var server = http.createServer(handler).listen(config.PORT)
+var sio    = io.listen(server)
 
 /**
 * The function used by node.js to handle a request
 */
 function handler (request, response) {
-	var filePath = config.VIEWS + request.url;
-	extension    = path.extname(filePath);
-	contentType  = 'text/html';
-	// Special cases
-	switch (filePath) {
-		case config.VIEWS + '/':
-			filePath = config.VIEWS + '/' + 'index.html';
-		break;
-		case './supersecretfunction':
-			counter = 0;
-			filePath = config.VIEWS + '/' + 'index.html';
-			console.log("Counter reset.");
-		break;
-	}
-	// Serve static files
+    var filePath = config.VIEWS + request.url
+    extension    = path.extname(filePath)
+    contentType  = 'text/html'
+    // Special cases
+    switch (filePath) {
+        case config.VIEWS + '/':
+            filePath = config.VIEWS + '/' + 'index.html'
+        break;
+        case './supersecretfunction':
+            counter = 0;
+            filePath = config.VIEWS + '/' + 'index.html'
+            console.log("Counter reset.")
+        break;
+    }
+    // Serve static files
     switch (extension) {
         case '.js':
-            contentType = 'text/javascript';
+            contentType = 'text/javascript'
         break;
         case '.css':
-            contentType = 'text/css';
+            contentType = 'text/css'
         break;
     }
 
-	fs.exists(filePath, function (exists) {
+    fs.exists(filePath, function (exists) {
         if (exists) {
-            fs.readFile(filePath, function(error, content) {
+            fs.readFile(filePath, function (error, content) {
                 if (error) {
-                    response.writeHead(500);
-					response.end("Error loading " + filePath);
+                    response.writeHead(500)
+                    response.end("Error loading " + filePath)
                 } else {
-                    response.writeHead(200, {'Content-Type': contentType });
-                    response.end(content, 'utf-8');
+                    response.writeHead(200, {'Content-Type': contentType })
+                    response.end(content, 'utf-8')
                 }
             });
         } else {
-            response.writeHead(404);
-            response.end("Couldn't find " + filePath);
+            response.writeHead(404)
+            response.end("Couldn't find " + filePath)
         }
     });
 }
@@ -60,27 +60,27 @@ function handler (request, response) {
 // socketio events
 sio.sockets.on("connection", function (socket) {
 
-	// On client connection, we must send the actual count value and its last update time
-	socket.emit("updateval", { val: counter }); // send to new client
-	db.query('select timestamp from updates order by timestamp desc limit 1', function (err, rows) {
-		if (err)
-			console.log("Error connecting to mysql on select statement.\n" + err);
-		else if (rows.length > 0)
-			socket.emit("updatetime", { timestamp: rows[0].timestamp });
-	});
-	
-	// Increment event
-	socket.on("incr", function (data) {
-		socket.broadcast.emit("updateval", { val: counter++ }); // send to all clients except the new connection
-		var timestamp = new Date();
-		db.query('insert into updates(timestamp) values(?)', [timestamp], function (err, result) {
-			if (err)
-				console.log("Error connecting to mysql on insert statement.\n" + err);
-			else
-				sio.sockets.emit("updatetime", { timestamp: timestamp }); // send to all clients
-		});
-	});
+    // On client connection, we must send the actual count value and its last update time
+    socket.emit("updateval", { val: counter }); // send to new client
+    db.query('select timestamp from updates order by timestamp desc limit 1', function (err, rows) {
+        if (err)
+            console.log("Error connecting to mysql on select statement.\n" + err)
+        else if (rows.length > 0)
+            socket.emit("updatetime", { timestamp: rows[0].timestamp });
+    });
+    
+    // Increment event
+    socket.on("incr", function (data) {
+        socket.broadcast.emit("updateval", { val: counter++ }); // send to all clients except the new connection
+        var timestamp = new Date()
+        db.query('insert into updates(timestamp) values(?)', [timestamp], function (err, result) {
+            if (err)
+                console.log("Error connecting to mysql on insert statement.\n" + err)
+            else
+                sio.sockets.emit("updatetime", { timestamp: timestamp }); // send to all clients
+        });
+    });
 
-});
+}); // sio.sockets.on
 
-console.log("Server running on port %d", config.PORT);
+console.log("Server running on port %d", config.PORT)
