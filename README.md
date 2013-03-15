@@ -3,7 +3,7 @@ This little application is a test for [Solib](https://github.com/ECE-Campus-Clus
 
 ## How to use it
 1. node.js can be downloaded [here](http://nodejs.org/download/).
-To install socket.io and node-mysql, run the following command in the CounterApp directory:
+To install socket.io and node-mysql, run the following command in the Counter directory:
 
 ```bash
 npm install
@@ -19,7 +19,7 @@ You should now have a directory named `node_modules` with a socket.io and mysql 
 
 You can also make the server run as a background process using: `nohup node server.js > output.log &`.
 
-* By taping `/supersecretfunction` after your domain name and port number you will reset the counter to 0.
+* By taping the `/supersecretfunction` request you will reset the counter to 0.
 
 ## Licensing
 Copyright (C) 2013 by Thibault Charbonnier.
