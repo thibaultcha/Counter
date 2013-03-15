@@ -1,0 +1,12 @@
+{
+  "name": "Counter",
+  "author": "thibaultCha",
+  "version": "1.0.0",
+  "description": "A simple app example showing the use of Node.js and Socket.IO",
+  "private": true,
+  "dependencies": {
+    "socket.io": "0.9.13",
+    "mysql": "2.0.0-alpha7"
+  },
+  "engine": "node 0.8.x"
+}

@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
        <meta charset="utf-8">
-        <title>CounterApp</title>
+        <title>Counter</title>
 
 	 	<script src="/socket.io/socket.io.js"></script>
 	 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
@@ -17,26 +17,26 @@
 			</center>
 		</div>
 		<script type="text/javascript">
-			var incrBtn = document.getElementById("incrBtn")
-			compteur    = document.getElementById("compteur")
-			lastupdate  = document.getElementById("lastupdate")
-			socket      = io.connect("http://localhost:25000")
+			var incrBtn = document.getElementById("incrBtn");
+			compteur    = document.getElementById("compteur");
+			lastupdate  = document.getElementById("lastupdate");
+			socket      = io.connect("http://localhost:25000"); // port must be the same as config.PORT in config.js
 
 			socket.on('updateval', function(data) {
-				compteur.innerHTML = data.val
+				compteur.innerHTML = data.val;
 			});
 
 			socket.on('updatetime', function(data) {
-				lastupdate.innerHTML = new Date(data.timestamp).toUTCString()
+				lastupdate.innerHTML = new Date(data.timestamp).toUTCString();
 			});
 
 			incrBtn.addEventListener("click", function(event) {
 				// To prevent 'cheating', of course you can remove it since the goal of node.js is to build scalable applications; so you can test to tigger the button with some magic code.
 				if (event.screenX != 0 && event.screenY != 0) {
-					compteur.innerHTML = parseInt(compteur.innerHTML)+1
-					socket.emit('incr', null)
+					compteur.innerHTML = parseInt(compteur.innerHTML)+1;
+					socket.emit('incr', null);
 				} else { 
-					console.log("Cheating is bad.")
+					console.log("Cheating is bad.");
 				}
 			});
 		</script>
