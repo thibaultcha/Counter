@@ -6,7 +6,7 @@ function connect (host, database, username, password) {
         database : database,
         user     : username,
         password : password
-    })
+    });
 
     connection.query('CREATE TABLE IF NOT EXISTS `updates` (`timestamp` datetime NOT NULL)',
         function (err, rows) {

@@ -1,4 +1,12 @@
-var config = require('./config')
+/**
+ * Counter v1.0.0
+ * https://github.com/thibaultCha/Counter
+ * License: MIT
+ *
+ * Copyright (C) 2013 thibaultCha - A simple example of Node.js and Socket.IO
+ */
+
+var config = require('./config') // local config.js file
 http       = require('http')
 io         = require('socket.io')
 path       = require('path')
@@ -8,11 +16,11 @@ counter    = 0
 
 db = mysql.connect(config.DBHOST, config.DBNAME, config.DBUSERNAME, config.DBPASSWORD)
 
-var server = http.createServer(handler).listen(config.PORT)
-var sio    = io.listen(server)
+var server = http.createServer(handler).listen(config.PORT) // creates the HTTP server
+var sio    = io.listen(server) // socket.io is listening to server
 
 /**
-* The function used by node.js to handle a request
+* The function used by `server` to handle a request
 */
 function handler (request, response) {
     var filePath = config.VIEWS + request.url
@@ -46,7 +54,7 @@ function handler (request, response) {
                     response.writeHead(500)
                     response.end("Error loading " + filePath)
                 } else {
-                    response.writeHead(200, {'Content-Type': contentType })
+                    response.writeHead(200, {'Content-Type': contentType });
                     response.end(content, 'utf-8')
                 }
             });
@@ -61,7 +69,7 @@ function handler (request, response) {
 sio.sockets.on("connection", function (socket) {
 
     // On client connection, we must send the actual count value and its last update time
-    socket.emit("updateval", { val: counter }); // send to new client
+    socket.emit("updateval", { val: counter }); // send to the socket (the new client)
     db.query('select timestamp from updates order by timestamp desc limit 1', function (err, rows) {
         if (err)
             console.log("Error connecting to mysql on select statement.\n" + err)
@@ -71,13 +79,13 @@ sio.sockets.on("connection", function (socket) {
     
     // Increment event
     socket.on("incr", function (data) {
-        socket.broadcast.emit("updateval", { val: counter++ }); // send to all clients except the new connection
+        socket.broadcast.emit("updateval", { val: counter++ }); // socket is broadcasting to all others sockets
         var timestamp = new Date()
         db.query('insert into updates(timestamp) values(?)', [timestamp], function (err, result) {
             if (err)
                 console.log("Error connecting to mysql on insert statement.\n" + err)
             else
-                sio.sockets.emit("updatetime", { timestamp: timestamp }); // send to all clients
+                sio.sockets.emit("updatetime", { timestamp: timestamp }); // send to all sockets
         });
     });
 

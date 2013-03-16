@@ -11,7 +11,7 @@ const rootviews = __dirname + "/views"
 const host = "localhost"
 
 /* database name */
-const database = "solib"
+const database = "counter"
 
 /* database username */
 const username = "root"
@@ -21,7 +21,7 @@ const password = "root" // omg
 
 module.exports = {
     PORT       : port,
-    VIEWS 	   : rootviews,
+    VIEWS      : rootviews,
     DBHOST     : host,
     DBNAME     : database,
     DBUSERNAME : username,
