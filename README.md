@@ -2,14 +2,12 @@
 This little application is a test for [Solib](https://github.com/ECE-Campus-Cluster/SoLib) using [Node.js](http://nodejs.org/) and [Socket.IO](http://socket.io/) to display a synchronized counter between multiple browsers.
 
 ## How to use it
-1. node.js can be downloaded [here](http://nodejs.org/download/).
+1. Node.js can be downloaded [here](http://nodejs.org/download/).
 To install socket.io and node-mysql, run the following command in the Counter directory:
-
 ```bash
 npm install
 ```
-
-You should now have a directory named `node_modules` with a socket.io and mysql folders in it.
+You should now have a directory named `node_modules` with a `socket.io` and `mysql` folders in it.
 
 2. Configure your app in config.js **and** the address and port of your Node.js server in the index.html `io.connection` function.
 

@@ -65,7 +65,7 @@ function handler (request, response) {
     });
 }
 
-// socketio events
+// socket.io events
 sio.sockets.on("connection", function (socket) {
 
     // On client connection, we must send the actual count value and its last update time
