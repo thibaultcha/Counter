@@ -1,5 +1,5 @@
 /**
- * Counter v1.0.0
+ * Counter v1.0.1
  * https://github.com/thibaultCha/Counter
  * License: MIT
  *
@@ -7,12 +7,12 @@
  */
 
 var config = require('./config') // local config.js file
-http       = require('http')
-io         = require('socket.io')
-path       = require('path')
-fs         = require('fs')
-mysql      = require('./mysql')
-counter    = 0
+, http     = require('http')
+, io       = require('socket.io')
+, path     = require('path')
+, fs       = require('fs')
+, mysql    = require('./mysql')
+, counter  = 0
 
 db = mysql.connect(config.DBHOST, config.DBNAME, config.DBUSERNAME, config.DBPASSWORD)
 
@@ -23,9 +23,9 @@ var sio    = io.listen(server) // socket.io is listening to server
 * The function used by `server` to handle a request
 */
 function handler (request, response) {
-    var filePath = config.VIEWS + request.url
-    extension    = path.extname(filePath)
-    contentType  = 'text/html'
+    var filePath  = config.VIEWS + request.url
+    , extension   = path.extname(filePath)
+    , contentType = 'text/html'
     // Special cases
     switch (filePath) {
         case config.VIEWS + '/':
@@ -65,7 +65,7 @@ function handler (request, response) {
     });
 }
 
-// socket.io events
+// Socket.IO events
 sio.sockets.on("connection", function (socket) {
 
     // On client connection, we must send the actual count value and its last update time

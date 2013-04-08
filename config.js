@@ -1,22 +1,21 @@
-/* port the server will be listening on */
+/* Port the server will be listening on */
 const port = 25000
 
-/* dir for frontend views */
+/* Dir for frontend views */
 const rootviews = __dirname + "/views"
 
+/* FROM HERE: OPTIONAL CONFIG  */
 
-/* OPTIONAL CONFIG FROM HERE */
-
-/* database host */
+/* Database host */
 const host = "localhost"
 
-/* database name */
+/* Database name */
 const database = "counter"
 
-/* database username */
+/* Database username */
 const username = "root"
 
-/* database password */
+/* Database password */
 const password = "root" // omg
 
 module.exports = {
