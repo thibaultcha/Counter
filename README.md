@@ -3,7 +3,7 @@ This little application is using [Node.js](http://nodejs.org/) and [Socket.IO](h
 
 ![](screen.png)
 
-A Database liaison is optional but can be performed with [node-mysql](https://github.com/felixge/node-mysql) in config.js.
+A Database linkage is optional but can be performed with [node-mysql](https://github.com/felixge/node-mysql) in config.js.
 
 ## Why?
 It was a test for [Solib](https://github.com/ECE-Campus-Cluster/SoLib) and my first Node.js experience. Why a counter? Because it's supposed to be scalable. So once your installation is running, **don't hesitate to violently sacrifice your mouse/trackpad for science.**
@@ -18,13 +18,22 @@ You should now have a directory named `node_modules` with a `socket.io` and `mys
 
 2. Configure your app in config.js **and** write `http://yourdomain:yourport` in the index.html `io.connection` function.
 
-3. Run the server with the following command: `node server.js`.
+3. Run the server with the following command:
+```bash
+node server.js
+```
 
-4. Open your browser and go to `http://yourdomain:yourport` (address of your Node.js server). That's it. Now click like Hell.
+4. Open your browser and go to `http://yourdomain:yourport` (address of your Node.js server). That's it.
 
-You can also make the server run as a background process using: `nohup node server.js > output.log &`.
+5. Now click like Hell.
 
-* By taping the `/supersecretfunction` request you will reset the counter to 0.
+## Tips
+You can also make the server run as a background process using:
+```bash
+nohup node server.js > output.log &
+```
+
+* By taping the `/supersecretfunction` request, you will reset the counter to 0.
 
 ## Licensing
 Copyright (C) 2013 by Thibault Charbonnier.
