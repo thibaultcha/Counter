@@ -11,10 +11,10 @@ var config = require('./config') // local config.js file
 , io       = require('socket.io')
 , path     = require('path')
 , fs       = require('fs')
-, mysql    = require('./mysql')
+//, mysql    = require('./mysql')
 , counter  = 0
 
-db = mysql.connect(config.DBHOST, config.DBNAME, config.DBUSERNAME, config.DBPASSWORD)
+//db = mysql.connect(config.DBHOST, config.DBNAME, config.DBUSERNAME, config.DBPASSWORD)
 
 var server = http.createServer(handler).listen(config.PORT) // creates the HTTP server
 var sio    = io.listen(server) // socket.io is listening to server
@@ -70,16 +70,18 @@ sio.sockets.on("connection", function (socket) {
 
     // On client connection, we must send the actual count value and its last update time
     socket.emit("updateval", { val: counter }); // send to the socket (the new client)
+/*
     db.query('select timestamp from updates order by timestamp desc limit 1', function (err, rows) {
         if (err)
             console.log("Error connecting to mysql on select statement.\n" + err)
         else if (rows.length > 0)
             socket.emit("updatetime", { timestamp: rows[0].timestamp });
     });
-    
+*/  
     // Increment event
     socket.on("incr", function (data) {
         socket.broadcast.emit("updateval", { val: counter++ }); // socket is broadcasting to all others sockets
+/*
         var timestamp = new Date()
         db.query('insert into updates(timestamp) values(?)', [timestamp], function (err, result) {
             if (err)
@@ -87,6 +89,7 @@ sio.sockets.on("connection", function (socket) {
             else
                 sio.sockets.emit("updatetime", { timestamp: timestamp }); // send to all sockets
         });
+*/
     });
 
 }); // sio.sockets.on
