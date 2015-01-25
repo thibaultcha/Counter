@@ -1,12 +1,10 @@
 # Counter
-This little application is using [Node.js](http://nodejs.org/) and [Socket.IO](http://socket.io/) to display a synchronized counter between multiple browsers.
+
+This little application is using [Node.js](http://nodejs.org/) and [Socket.IO](http://socket.io/) to display a synchronized counter between multiple browsers. It was a **test** for [Solib](https://github.com/ECE-Campus-Cluster/SoLib) (A school project) and my first Node.js experience.
 
 ![](screen.png)
 
-A Database linkage is optional but can be performed with [node-mysql](https://github.com/felixge/node-mysql) in config.js.
-
-## Why?
-It was a test for [Solib](https://github.com/ECE-Campus-Cluster/SoLib) and my first Node.js experience. Why a counter? Because it's supposed to be scalable. So once your installation is running, **don't hesitate to violently sacrifice your mouse/trackpad for science.**
+A database access is optional but can be performed with [node-mysql](https://github.com/felixge/node-mysql) in config.js.
 
 ## How to use it
 1. Node.js can be downloaded [here](http://nodejs.org/download/).
@@ -33,7 +31,7 @@ You can also make the server run as a background process using:
 nohup node server.js > output.log &
 ```
 
-* By taping the `/supersecretfunction` request, you will reset the counter to 0.
+* By hitting the `/supersecretfunction` endpoint, you will reset the counter to 0.
 
 ## License
 Copyright (C) 2013 by Thibault Charbonnier.
