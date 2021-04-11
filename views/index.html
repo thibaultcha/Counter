@@ -19,8 +19,7 @@
             var incrBtn  = document.getElementById("incrBtn")
             , compteur   = document.getElementById("compteur")
             , lastupdate = document.getElementById("lastupdate")
-            , socket     = io.connect("http://localhost:25000") // andress and port of your Node.js server.
-
+            , socket     = io.connect()
             socket.on('updateval', function (data) {
                 compteur.innerHTML = data.val
             });
